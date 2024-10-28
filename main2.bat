@@ -1,7 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
-:: Automated script that runs daily in task scheduler, will copy files from one directory to another.
-:: In the destination directory, it will create new folder with date (yesterday) inside each subfolder and copy files into.
+:: Automated script that runs daily in task scheduler, will copy files from one directory's folders to another.
+:: In the destination directory's folder, it will create new folder with date (yesterday) inside each subfolder and copy files into.
 
 :: Set the source and destination directories
 set sourceDir="C:\Users\leex17\OneDrive - Boston Scientific\Desktop\testA"
@@ -31,9 +31,9 @@ for /d %%d in (%sourceDir%\*) do (
     :: Create the date folder inside the subfolder in the destination directory
     mkdir %destinationDir%\"!subfolder!"\%folderName%
 
-    @REM :: Copy files from the source subfolder to the newly created date folder in the destination subfolder
-    @REM :: Duplicates are not copied
-    @REM xcopy %%d\* %destinationDir%\!subfolder!\%folderName% /s /e /d
+    :: Copy files from the source subfolder to the newly created date folder in the destination subfolder
+    :: Duplicates are not copied
+    xcopy %sourceDir%\"!subfolder!"\* %destinationDir%\"!subfolder!"\%folderName% /s /e /d
 )
 endlocal
 

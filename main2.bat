@@ -20,6 +20,7 @@ set folderName=%year%-%month%-%day%
 :: Iterate over each subfolder in the source directory
 for /d %%d in (%sourceDir%\*) do (
     set subfolder=%%~nxd
+    :: Don't comment out next line, somehow syntax breaks without it
     echo Processing subfolder: !subfolder!
 
     :: Create the corresponding subfolder in the destination directory if it doesn't exist

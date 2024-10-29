@@ -14,7 +14,7 @@ for /f "tokens=1-3 delims=-" %%a in ('powershell -command "Get-Date ((Get-Date).
     set day=%%c
 )
 
-:: Create the date folder name
+:: Folder name
 set folderName=%year%-%month%-%day%
 
 :: Iterate over each subfolder in the source directory

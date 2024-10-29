@@ -7,7 +7,7 @@ setlocal enabledelayedexpansion
 set sourceDir="C:\Documents and Settings\Administrator\Desktop\testA"
 set destinationDir="C:\Documents and Settings\Administrator\Desktop\testB"
 
-:: Get the date of yesterday
+:: Get the date of today
 for /f "tokens=1-3 delims=-" %%a in ('date /t') do (
     set year=%%a
     set month=%%b

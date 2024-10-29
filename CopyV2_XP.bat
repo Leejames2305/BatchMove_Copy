@@ -30,11 +30,13 @@ for /d %%d in (%sourceDir%\*) do (
     )
 
     :: Create the date folder inside the subfolder in the destination directory
-    mkdir %destinationDir%\"!subfolder!"\%folderName%
+    if not exist %destinationDir%\"!subfolder!"\%folderName% (
+        mkdir %destinationDir%\"!subfolder!"\%folderName%
+    )
 
     :: Copy files from the source subfolder to the newly created date folder in the destination subfolder
     :: Duplicates are not copied
-    xcopy %sourceDir%\"!subfolder!"\* %destinationDir%\"!subfolder!"\%folderName% /s /e /d
+    xcopy %sourceDir%\"!subfolder!"\* %destinationDir%\"!subfolder!"\%folderName% /s /e /d /q
 )
 endlocal
 

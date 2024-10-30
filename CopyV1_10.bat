@@ -20,8 +20,7 @@ if not exist  "%datePath%" (
     mkdir "%datePath%"
 )
 
-:: Copy files from source directory to the newly created folder in destination directory
-:: Duplicates are not copied
+:: Copy files from source to newly created folder in destination, duplicates are not copied
 xcopy "%sourceDir%" "%datePath%" /e /d /q
 
 :: Pause the script to see the output

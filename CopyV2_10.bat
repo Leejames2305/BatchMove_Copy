@@ -34,7 +34,7 @@ for /d %%d in (%sourceDir%\*) do (
     )
 
     :: Copy files from the source subfolder to the newly created date folder in the destination subfolder, Duplicates are not copied
-    xcopy %sourceDir%\"!subfolder!"\* %destinationDir%\"!subfolder!"\%folderName% /s /e /d /q
+    xcopy %sourceDir%\"!subfolder!"\* %destinationDir%\"!subfolder!"\%folderName% /e /d /q
 )
 endlocal
 

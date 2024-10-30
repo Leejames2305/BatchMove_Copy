@@ -19,7 +19,7 @@ mkdir %destinationDir%\%folderName%
 
 :: Copy files from source directory to the newly created folder in destination directory
 :: Duplicates are not copied
-xcopy %sourceDir% %destinationDir%\%folderName% /s /e /d
+xcopy %sourceDir% %destinationDir%\%folderName% /e /d /q
 
 :: Pause the script to see the output
 pause

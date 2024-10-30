@@ -1,6 +1,6 @@
 @echo off
 :: Automated script that runs daily in task scheduler, will copy files from one directory to another.
-:: In the destination directory, it will create new folder with date (yesterday) and copy files into.
+:: In the destination directory, it will create new folder with date and copy files into.
 
 :: Set the source and destination directories
 set sourceDir="C:\Documents and Settings\Administrator\Desktop\testA"

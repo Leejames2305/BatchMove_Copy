@@ -6,12 +6,13 @@
 set "sourceDir=C:\Documents and Settings\Administrator\Desktop\testA"
 set "destinationDir=C:\Documents and Settings\Administrator\Desktop\testB"
 
-:: Get the date of today
+:: Get the date of today (Based ON dd-MMM-yy format)
 for /f "tokens=1-3 delims=-" %%a in ('date /t') do (
-    set year=%%a
+    set year=20%%c
     set month=%%b
-    set day=%%c
+    set day=%%a
 )
+set year=%year: =%      & :: Remove space
 
 :: Create the folder with today's date in the destination directory
 set "datePath=%destinationDir%\%year%\%month%\%day%"

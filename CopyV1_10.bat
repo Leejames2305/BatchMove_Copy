@@ -7,7 +7,7 @@ set "sourceDir=C:\Users\leex17\OneDrive - Boston Scientific\Desktop\testA"
 set "destinationDir=C:\Users\leex17\OneDrive - Boston Scientific\Desktop\testB"
 
 :: Get the date of today
-for /f "tokens=1-3 delims=-" %%a in ('powershell -command "Get-Date -Format yyyy-MM-dd"') do (
+for /f "tokens=1-3 delims=-" %%a in ('powershell -command "Get-Date -Format yyyy-MMM-dd"') do (
     set year=%%a
     set month=%%b
     set day=%%c

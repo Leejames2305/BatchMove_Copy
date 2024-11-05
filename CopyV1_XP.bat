@@ -22,7 +22,7 @@ if not exist  "%datePath%" (
 )
 
 :: Copy files from source to newly created folder in destination, duplicates are not copied, unless they are newer
-xcopy "%sourceDir%" "%datePath%" /e /d /q
+xcopy "%sourceDir%" "%datePath%" /e /d /q /y
 
 :: Pause the script to see the output
 pause

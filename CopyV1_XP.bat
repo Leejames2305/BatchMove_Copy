@@ -6,7 +6,7 @@
 set "sourceDir=C:\Documents and Settings\Administrator\Desktop\testA"
 set "destinationDir=C:\Documents and Settings\Administrator\Desktop\testB"
 
-:: Get the date of today (Based ON dd-MMM-yy format)
+:: Get the date of today (Assumming in dd-MMM-yy)
 for /f "tokens=1-3 delims=-" %%a in ('date /t') do (
     set year=20%%c
     set month=%%b

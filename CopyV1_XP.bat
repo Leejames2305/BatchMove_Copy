@@ -12,7 +12,7 @@ for /f "tokens=1-3 delims=-" %%a in ('date /t') do (
     set month=%%b
     set day=%%a
 )
-set year=%year: =%      & :: Remove space
+set year=%year: =%
 
 :: Create the folder with today's date in the destination directory
 set "datePath=%destinationDir%\%year%\%month%\%day%"

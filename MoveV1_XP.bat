@@ -5,8 +5,8 @@ setlocal enabledelayedexpansion
 :: (SourceDir\29Dec24\Stuff.xyz) -> (DestinationDir\2024\12\29\Stuff.xyz)
 
 :: Set the source and destination directories
-set "sourceDir=F:\"
-set "destinationDir=\\vmware-host\Shared Folders\tempshared\"
+set "sourceDir=F:"
+set "destinationDir=\\vmware-host\Shared Folders\tempshared"
 
 :: Get the date from the folders' name
 for /d %%d in (%sourceDir%\*) do (
@@ -14,7 +14,7 @@ for /d %%d in (%sourceDir%\*) do (
     set year=20!folderName:~5,2!
     set month=!folderName:~2,3!
     set day=!folderName:~0,2!
-    echo Year: !year! Month: !month! Day: !day!
+    echo Year:!year! Month:!month! Day:!day!
     
     REM Create the folder with today's date in the destination directory
     set "datePath=%destinationDir%\!year!\!month!\!day!"

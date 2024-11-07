@@ -40,7 +40,33 @@ for /d %%d in (%sourceDir%\*) do (
                 echo Copy failed, not deleting folder: %%d
             )
         ) else (
-            echo Skipping invalid folder: %%d
+            REM Get the date of today (Assumming in dd-MMM-yy)
+            for /f "tokens=1-3 delims=-" %%a in ('date /t') do (
+                set year=20%%c
+                set month=%%b
+                set day=%%a
+            )
+            set year=!year: =!
+
+            REM Create the date folder in the destination directory
+            set "datePath=%destinationDir%\!year!\!month!\!day!\Line 3\Distal Allignment Machine\"
+
+            if not exist "!datePath!" (
+                mkdir "!datePath!"
+            )
+
+            REM Move all files
+            for /R "%sourceDir%" %%f in (*.*) do (
+                echo Moving file: %%f
+                move "%%f" "!datePath!" > nul
+            )
+
+            if !errorlevel! equ 0 (
+                for /d %%d in (%sourceDir%\*) do (
+                    echo Deleting folder: %%d
+                    REM rmdir "%%d" /s /q
+                )
+            )
         )
     )
 )

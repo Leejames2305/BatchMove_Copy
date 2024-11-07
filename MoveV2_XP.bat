@@ -24,8 +24,7 @@ if not exist "!datePath!" (
 
 :: Move all files
 for /R "%sourceDir%" %%f in (*.*) do (
-    if not "%%~ff"=="%~f0" (
-        echo Moving file: %%f
+    echo Moving file: %%f
 )
 
 pause

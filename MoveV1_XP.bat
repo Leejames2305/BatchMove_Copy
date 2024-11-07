@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 :: Automated script that runs daily in task scheduler, will move files from one directory to another.
 :: In the destination directory, it will split the date into detailed folders, and move files into.
-:: (SourceDir\29Dec24\Stuff.xyz) -> (DestinationDir\2024\12\29\Stuff.xyz)
+:: (SourceDir\29Dec24\Stuff.xyz) -> (DestinationDir\2024\Dec\29\Stuff.xyz)
 
 :: Set the source and destination directories
 set "sourceDir=F:"

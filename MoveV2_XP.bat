@@ -16,7 +16,7 @@ for /f "tokens=1-3 delims=-" %%a in ('date /t') do (
 set year=%year: =%
 
 :: Create the date folder in the destination directory
-set "datePath=%destinationDir%\!year!\!month!\!day!\"
+set "datePath=%destinationDir%\!year!\!month!\!day!\Line 3\Distal Allignment Machine\"
 
 if not exist "!datePath!" (
     mkdir "!datePath!"
@@ -25,6 +25,14 @@ if not exist "!datePath!" (
 :: Move all files
 for /R "%sourceDir%" %%f in (*.*) do (
     echo Moving file: %%f
+    move "%%f" "!datePath!" > nul
+)
+
+if !errorlevel! equ 0 (
+    for /d %%d in (%sourceDir%\*) do (
+        echo Deleting folder: %%d
+        REM rmdir "%%d" /s /q
+    )
 )
 
 pause

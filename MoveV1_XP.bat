@@ -14,12 +14,11 @@ for /d %%d in (%sourceDir%\*) do (
 
     REM Is the folder name null?
     if "!folderName!" neq "" (
-        set year=20!folderName:~5,2!
-        set month=!folderName:~2,3!
-        set day=!folderName:~0,2!
-
         REM Check if the date is valid
-        if "!day!" GEQ "01" if "!day!" LEQ "31" (
+        if "!folderName:~0,2!" GEQ "01" if "!folderName:~0,2!" LEQ "31" (
+            set year=20!folderName:~5,2!
+            set month=!folderName:~2,3!
+            set day=!folderName:~0,2!
             echo Processing folder: %%d
             echo Year:!year! Month:!month! Day:!day!
             

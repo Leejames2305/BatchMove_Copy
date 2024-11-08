@@ -9,7 +9,7 @@ setlocal enabledelayedexpansion
 :: "sourceDir=F:" OR "sourceDir=C:\SomeFolder"
 :: "destinationDir = \\network\shared\folder"
 :: "defaultFolder = Line 1\Distal Allignment Machine"
-set "sourceDir=F:\"
+set "sourceDir=F:"
 set "destinationDir=\\vmware-host\Shared Folders\tempshared"
 set "defaultFolder=Line 3\Distal Allignment Machine"
 

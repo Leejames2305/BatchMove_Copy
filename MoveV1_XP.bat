@@ -27,15 +27,15 @@ if not exist "%destinationDir%" (
 )
 
 :: Check if the source directory is empty
-for /F %%i in ('dir /b /a "%sourceDir%"') do (
-    echo Source Folder is NOT empty
-    goto :continue
+dir /b "%sourceDir%" | findstr . >nul
+if errorlevel 1 (
+    echo Source is empty
+    pause
+    exit /b 1
+) else (
+    echo Source is not empty
 )
-echo Source Folder is empty
-pause
-exit /b 1
 
-:continue
 :: Make an empty folder to trigger the script 
 mkdir "%sourceDir%\emptyTrigger"
 

@@ -2,8 +2,8 @@
 setlocal enabledelayedexpansion
 :: Automated script that runs daily in task scheduler, will move files from one directory to another.
 :: In the destination directory, it will split the date into detailed folders, and move files into.
-:: (sourceDir\29Dec24\Stuff.xyz) -> (destinationDir\2024\Dec\29\Stuff.xyz)
-:: If the folders in SrcDir is not ddMMMyy, it will move all files to a default folder.
+:: (sourceDir\29Dec2024\Stuff.xyz) -> (destinationDir\2024\Dec\29\Stuff.xyz)
+:: If the folders in SrcDir is not ddMMMyyyy, it will move all files to a default folder.
 
 :: Set the source and destination directories
 :: "sourceDir=F:" OR "sourceDir=C:\SomeFolder"
@@ -39,7 +39,7 @@ if errorlevel 1 (
 :: Make an empty folder to trigger the script 
 mkdir "%sourceDir%\emptyTrigger"
 
-:: Get the date from the folders' name, ONLY if it is in ddMMMyy format, else fallback to today's date
+:: Get the date from the folders' name, ONLY if it is in ddMMMyyyy format, else fallback to today's date
 for /d %%d in ("%sourceDir%\*") do (
     set folderName=%%~nxd
 
@@ -47,7 +47,7 @@ for /d %%d in ("%sourceDir%\*") do (
     if "!folderName!" neq "" (
         REM Check if the date is valid
         if "!folderName:~0,2!" GEQ "01" if "!folderName:~0,2!" LEQ "31" (
-            set year=20!folderName:~5,2!
+            set year=!folderName:~5,4!
             set month=!folderName:~2,3!
             set day=!folderName:~0,2!
             echo Processing folder: %%d

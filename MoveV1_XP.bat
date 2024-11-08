@@ -3,10 +3,12 @@ setlocal enabledelayedexpansion
 :: Automated script that runs daily in task scheduler, will move files from one directory to another.
 :: In the destination directory, it will split the date into detailed folders, and move files into.
 :: (SourceDir\29Dec24\Stuff.xyz) -> (DestinationDir\2024\Dec\29\Stuff.xyz)
+:: If the folders in SrcDir is not ddMMMyy, it will move all files to a default folder.
 
 :: Set the source and destination directories
 set "sourceDir=F:"
 set "destinationDir=\\vmware-host\Shared Folders\tempshared"
+set "defaultFolder=Line 3\Distal Allignment Machine"
 
 :: Get the date from the folders' name, ONLY if it is in ddMMMyy format, else skip
 for /d %%d in (%sourceDir%\*) do (
@@ -49,7 +51,7 @@ for /d %%d in (%sourceDir%\*) do (
             set year=!year: =!
 
             REM Create the date folder in the destination directory
-            set "datePath=%destinationDir%\!year!\!month!\!day!\Line 3\Distal Allignment Machine\"
+            set "datePath=%destinationDir%\!year!\!month!\!day!\!defaultFolder!"
 
             if not exist "!datePath!" (
                 mkdir "!datePath!"

@@ -9,7 +9,7 @@ setlocal enabledelayedexpansion
 :: "sourceDir=F:" OR "sourceDir=C:\SomeFolder"
 :: "destinationDir = \\network\shared\folder"
 :: "defaultFolder = Line 1\Distal Allignment Machine"
-set "sourceDir=F:"
+set "sourceDir=F:\"
 set "destinationDir=\\vmware-host\Shared Folders\tempshared"
 set "defaultFolder=Line 3\Distal Allignment Machine"
 
@@ -26,6 +26,16 @@ if not exist "%destinationDir%" (
     exit /b 1
 )
 
+:: Check if the source directory is empty
+for /F %%i in ('dir /b /a "%sourceDir%"') do (
+    echo Source Folder is NOT empty
+    goto :continue
+)
+echo Source Folder is empty
+pause
+exit /b 1
+
+:continue
 :: Make an empty folder to trigger the script 
 mkdir "%sourceDir%\emptyTrigger"
 

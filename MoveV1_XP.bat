@@ -13,8 +13,21 @@ set "sourceDir=F:"
 set "destinationDir=\\vmware-host\Shared Folders\tempshared"
 set "defaultFolder=Line 3\Distal Allignment Machine"
 
-:: IF NO folder is present in sourceDir, Make an empty folder to trigger the script
-dir /ad /b "%sourceDir%" | findstr . >nul || mkdir "%sourceDir%\emptyTrigger"
+:: Check both directories are valid
+if not exist "%sourceDir%" (
+    echo Source directory does not exist: %sourceDir%
+    pause
+    exit /b 1
+)
+
+if not exist "%destinationDir%" (
+    echo Destination directory does not exist: %destinationDir%
+    pause
+    exit /b 1
+)
+
+:: Make an empty folder to trigger the script 
+mkdir "%sourceDir%\emptyTrigger"
 
 :: Get the date from the folders' name, ONLY if it is in ddMMMyy format, else fallback to today's date
 for /d %%d in ("%sourceDir%\*") do (

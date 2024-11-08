@@ -58,12 +58,14 @@ for /d %%d in (%sourceDir%\*) do (
             )
 
             REM Move all files
+            set "moveFailed=0"
             for /R "%sourceDir%" %%f in (*.*) do (
                 echo Moving file: %%f
                 move "%%f" "!datePath!" > nul
+                if !errorlevel! neq 0 set "moveFailed=1"
             )
 
-            if !errorlevel! equ 0 (
+            if !moveFailed! equ 0 (
                 for /d %%d in (%sourceDir%\*) do (
                     echo Deleting folder: %%d
                     REM rmdir "%%d" /s /q

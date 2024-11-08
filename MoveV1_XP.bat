@@ -11,7 +11,7 @@ set "destinationDir=\\vmware-host\Shared Folders\tempshared"
 set "defaultFolder=Line 3\Distal Allignment Machine"
 
 :: Get the date from the folders' name, ONLY if it is in ddMMMyy format, else fallback to today's date
-for /d %%d in (%sourceDir%\*) do (
+for /d %%d in ("%sourceDir%\*") do (
     set folderName=%%~nxd
 
     REM Is the folder name null?
@@ -66,7 +66,7 @@ for /d %%d in (%sourceDir%\*) do (
             )
 
             if !moveFailed! equ 0 (
-                for /d %%d in (%sourceDir%\*) do (
+                for /d %%d in ("%sourceDir%\*") do (
                     echo Deleting folder: %%d
                     rmdir "%%d" /s /q
                 )

@@ -71,13 +71,12 @@ for /d %%d in ("%sourceDir%\*") do (
                 echo Copy failed, not deleting folder: %%d
             )
         ) else (
-            REM Get the date of today (Assumming in dd-MMM-yy)
-            for /f "tokens=1-3 delims=-" %%a in ('date /t') do (
-                set year=20%%c
+            REM Get the date of today using PowerShell
+            for /f "tokens=1-3 delims=-" %%a in ('powershell -command "Get-Date -Format yyyy-MMM-dd"') do (
+                set year=%%a
                 set month=%%b
-                set day=%%a
+                set day=%%c
             )
-            set year=!year: =!
 
             REM Create the date folder in the destination directory
             set "datePath=%destinationDir%\!year!\!month!\!day!\!defaultFolder!"

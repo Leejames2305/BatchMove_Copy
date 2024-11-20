@@ -36,73 +36,26 @@ if errorlevel 1 (
     echo Source is not empty
 )
 
-:: Make an empty folder to trigger the script 
-mkdir "%sourceDir%\emptyTrigger"
-
-:: Get the date from the folders' name, ONLY if it is in ddMMMyyyy format, else fallback to today's date
-for /d %%d in ("%sourceDir%\*") do (
-    set folderName=%%~nxd
-
-    REM Is the folder name null?
-    if "!folderName!" neq "" (
-        REM Check if the date is valid
-        if "!folderName:~0,2!" GEQ "01" if "!folderName:~0,2!" LEQ "31" (
-            set year=!folderName:~5,4!
-            set month=!folderName:~2,3!
-            set day=!folderName:~0,2!
-            echo Processing folder: %%d
-            echo Year:!year! Month:!month! Day:!day!
-            
-            REM Create the date folder in the destination directory
-            set "datePath=%destinationDir%\!year!\!month!\!day!"
-
-            if not exist "!datePath!" (
-                mkdir "!datePath!"
-            )
-
-            REM Move files from source to newly created folder in destination
-            xcopy "%%d\*" "!datePath!" /e /d /q /y
-
-            REM Remove the source folder
-            if !errorlevel! equ 0 (
-                echo Copy success, deleting folder: %%d
-                rmdir "%%d" /s /q
-            ) else (
-                echo Copy failed, not deleting folder: %%d
-            )
-        ) else (
-            REM Get the date of today using PowerShell
-            for /f "tokens=1-3 delims=-" %%a in ('powershell -command "Get-Date -Format yyyy-MMM-dd"') do (
-                set year=%%a
-                set month=%%b
-                set day=%%c
-            )
-
-            REM Create the date folder in the destination directory
-            set "datePath=%destinationDir%\!year!\!month!\!day!\!defaultFolder!"
-
-            if not exist "!datePath!" (
-                mkdir "!datePath!"
-            )
-
-            REM Move all files
-            set "moveFailed=0"
-            for /R "%sourceDir%" %%f in (*.*) do (
-                echo Moving file: %%f
-                move "%%f" "!datePath!"
-                if !errorlevel! neq 0 set "moveFailed=1"
-            )
-
-            if !moveFailed! equ 0 (
-                for /d %%d in ("%sourceDir%\*") do (
-                    echo Deleting folder: %%d
-                    rmdir "%%d" /s /q
-                )
-            )
-        )
-    )
+:: Get the current date
+for /f "tokens=1-3 delims=-" %%a in ('powershell -command "Get-Date -Format yyyy-MMM-dd"') do (
+    set year=%%a
+    set month=%%b
+    set day=%%c
 )
-endlocal
+
+:: Create the date folder in the destination directory
+set "datePath=%destinationDir%\%year%\%month%\%day%\%defaultFolder%"
+
+if not exist "%datePath%" (
+    mkdir "%datePath%"
+)
+
+:: Move files from subdirectories in source to destination
+for /D %%i in ("%sourceDir%\*") do (
+    robocopy "%%i" "%datePath%\%%~ni" /MOVE /E
+)
+mkdir "%sourceDir%\Balloon Inspection"
+mkdir "%sourceDir%\Balloon InspectionFail"
 
 :: Pause the script to see the output
 pause

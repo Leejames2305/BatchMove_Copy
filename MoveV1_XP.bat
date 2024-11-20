@@ -71,13 +71,21 @@ for /d %%d in ("%sourceDir%\*") do (
                 echo Copy failed, not deleting folder: %%d
             )
         ) else (
-            REM Get the date of today (Assumming in dd-MMM-yy)
-            for /f "tokens=1-3 delims=-" %%a in ('date /t') do (
-                set year=20%%c
-                set month=%%b
-                set day=%%a
+            REM Get the date of today (Assumming in MM/dd/yyyy format)
+            for /f "tokens=1-3 delims=/" %%a in ('date /t') do (
+                set year=%%c
+                set monthNum=%%a
+                set day=%%b
             )
             set year=!year: =!
+            
+            REM Convert the month number to month name
+            set /a "monthIndex=1"
+            for %%m in (Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec) do (
+                if "!monthNum!"=="0!monthIndex!" set "month=%%m"
+                if "!monthNum!"=="!monthIndex!" set "month=%%m"
+                set /a "monthIndex+=1"
+            )
 
             REM Create the date folder in the destination directory
             set "datePath=%destinationDir%\!year!\!month!\!day!\!defaultFolder!"

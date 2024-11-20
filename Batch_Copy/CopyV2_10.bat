@@ -5,8 +5,8 @@ setlocal enabledelayedexpansion
 :: (SourceDir\Subfolders\Stuff.xyz) -> (DestinationDir\Subfolders\yyyy-mm-dd\Stuff.xyz)
 
 :: Set the source and destination directories
-set sourceDir="C:\Users\leex17\OneDrive - Boston Scientific\Desktop\testA"
-set destinationDir="C:\Users\leex17\OneDrive - Boston Scientific\Desktop\testB"
+set sourceDir="C:\Users\lee\OneDrive\Desktop\testA"
+set destinationDir="C:\Users\lee\OneDrive\Desktop\testB"
 
 :: Get the date of today
 for /f "tokens=1-3 delims=-" %%a in ('powershell -command "Get-Date -Format yyyy-MM-dd"') do (

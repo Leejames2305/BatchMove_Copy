@@ -1,9 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 :: Automated script that runs daily in task scheduler, will move files from one directory to another.
-:: In the destination directory, it will split the date into detailed folders, and move files into.
-:: (sourceDir\29Dec2024\Stuff.xyz) -> (destinationDir\2024\Dec\29\Stuff.xyz)
-:: If the folders in SrcDir is not ddMMMyyyy, it will move all files to a default folder.
+:: In the destination directory, it create folders with current date, and move files into.
 
 :: Set the source and destination directories
 :: "sourceDir=F:" OR "sourceDir=C:\SomeFolder"

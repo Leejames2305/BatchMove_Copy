@@ -50,7 +50,7 @@ if not exist "%datePath%" (
 
 :: Move files from subdirectories in source to destination
 for /D %%i in ("%sourceDir%\*") do (
-    robocopy "%%i" "%datePath%\%%~ni" /MOVE /E
+    robocopy "%%i" "%datePath%\%%~ni" /MOVE /E /IT
 )
 mkdir "%sourceDir%\Balloon Inspection"
 mkdir "%sourceDir%\Balloon InspectionFail"

@@ -1,5 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
+:: This version S is specifically made for machine that create date folder BUT NOT machine name folder
+:: Exp: sourceDir\29Dec2024\FlexOPT  -> destinationDir\2024\Dec\29\Line N6 PG Proximal Laser Bond 1 Station\FlexOPT
 :: Automated script that runs daily in task scheduler, will move files from one directory to another.
 :: In the destination directory, it will split the date into detailed folders, and move files into.
 :: (sourceDir\29Dec2024\Stuff.xyz) -> (destinationDir\2024\Dec\29\Stuff.xyz)
@@ -9,9 +11,9 @@ setlocal enabledelayedexpansion
 :: "sourceDir=F:" OR "sourceDir=C:\SomeFolder"
 :: "destinationDir = \\network\shared\folder"
 :: "defaultFolder = Line 1\Distal Allignment Machine"
-set "sourceDir=F:"
-set "destinationDir=\\vmware-host\Shared Folders\tempshared"
-set "defaultFolder=Line 3\Distal Allignment Machine"
+set "sourceDir=C:\Images"
+set "destinationDir=Z:\AutomaticTransfer"
+set "defaultFolder=Line N1 PG Proximal HSR 1 Station"
 
 :: Check both directories are valid
 if not exist "%sourceDir%" (
@@ -54,7 +56,7 @@ for /d %%d in ("%sourceDir%\*") do (
             echo Year:!year! Month:!month! Day:!day!
             
             REM Create the date folder in the destination directory
-            set "datePath=%destinationDir%\!year!\!month!\!day!"
+            set "datePath=%destinationDir%\!year!\!month!\!day!\!defaultFolder!"
 
             if not exist "!datePath!" (
                 mkdir "!datePath!"

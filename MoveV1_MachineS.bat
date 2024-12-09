@@ -73,8 +73,8 @@ for /d %%d in ("%sourceDir%\*") do (
                 echo Copy failed, not deleting folder: %%d
             )
         ) else (
-            REM Get the date of today (Assumming in MM/dd/yyyy format)
-            for /f "tokens=1-3 delims=/" %%a in ('date /t') do (
+            REM Get the date of today (Assumming in M/d/yyyy format)
+            for /f "tokens=2-4 delims=/ " %%a in ('date /t') do (
                 set year=%%c
                 set monthNum=%%a
                 set day=%%b
